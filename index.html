@@ -1,28 +1,334 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تیم تکنولوژی ای پی</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f5f5f5;
-            font-family: Tahoma, Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>تیم تکنولوژی ای پی | خانه و AP SYSTEM</title>
+  <style>
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url('Vazirmatn-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
 
-        h1 {
-            color: #0078D7;
-            font-size: 48px;
-            text-align: center;
-        }
-    </style>
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url('Vazirmatn-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url('Vazirmatn-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Vazirmatn', 'Tahoma', Arial, sans-serif;
+      background: #0f1219;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #e0e8f0;
+    }
+
+    .navbar {
+      width: 100%;
+      max-width: 1000px;
+      margin: 1rem auto 0.5rem;
+      background: #1a1f2b;
+      border: 1px solid #2a3344;
+      border-radius: 2.5rem;
+      padding: 0.7rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #4db8ff;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #b0c0d8;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(255, 255, 255, 0.02);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .nav-item:hover {
+      background: rgba(0, 160, 255, 0.15);
+      border-color: #3d8ec9;
+      color: #ffffff;
+    }
+
+    .nav-item.active-nav {
+      background: rgba(0, 150, 255, 0.25);
+      border-color: #4da6ff;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .page-container {
+      width: 100%;
+      max-width: 750px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .card {
+      width: 100%;
+      background: #1c212b;
+      border: 1px solid #2e3849;
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .site-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .ap-logo {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #3d9eff;
+      margin-bottom: 0.8rem;
+    }
+
+    .separator {
+      width: 80px;
+      height: 3px;
+      background: #3d9eff;
+      margin: 1rem auto 1.5rem;
+      border-radius: 2px;
+    }
+
+    .description {
+      color: #aab9ce;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin: 0.5rem 0;
+      font-weight: 400;
+    }
+
+    .system-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0.5rem 0;
+    }
+
+    .system-icon {
+      font-size: 2.5rem;
+      color: #4da6ff;
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+    }
+
+    .coming-soon-box {
+      background: #2a2f3a;
+      border: 2px solid #ffaa33;
+      border-radius: 3rem;
+      padding: 1rem 2.2rem;
+      margin: 1.5rem 0 1rem;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #ffcc66;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .system-desc {
+      color: #bcc8dd;
+      margin-top: 1rem;
+      max-width: 400px;
+      font-weight: 400;
+    }
+
+    .footer-note {
+      margin-top: 2rem;
+      color: #7a8aa0;
+      font-size: 0.9rem;
+      border-top: 1px solid #2e3747;
+      padding-top: 1.2rem;
+      width: 100%;
+      font-weight: 400;
+    }
+
+    .footer-note strong {
+      font-weight: 700;
+      color: #4db8ff;
+    }
+
+    .hidden-page {
+      display: none;
+    }
+
+    .visible-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (max-width: 550px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.6rem;
+        padding: 0.7rem 1.2rem;
+      }
+      .nav-links {
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .site-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>تیم تکنولوژی ای پی</h1>
+
+  <nav class="navbar">
+    <div class="brand">AP TECH</div>
+    <div class="nav-links">
+      <button class="nav-item active-nav" id="homeNavBtn">
+        خانه
+      </button>
+      <button class="nav-item" id="apSystemNavBtn">
+        AP SYSTEM
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-container">
+    
+    <div id="homePage" class="card visible-page">
+      <div class="ap-logo">AP</div>
+      <h1 class="site-title">تیم تکنولوژی ای پی</h1>
+      <div class="separator"></div>
+      <p class="description">
+        به دنیای نوآوری خوش آمدید. تیم ما در خط مقدم فناوری‌های پیشرفته حرکت می‌کند.
+        <br>از طریق نوار بالا می‌توانید به بخش‌های مختلف دسترسی داشته باشید.
+      </p>
+      <div class="footer-note">
+        <strong>AP TECH</strong> . آینده از آن ماست
+      </div>
+    </div>
+
+    <div id="apSystemPage" class="card hidden-page">
+      <div class="system-icon">AP</div>
+      <div class="system-title">AP SYSTEM</div>
+      <div class="separator" style="background: #ffaa33; width: 60px;"></div>
+      
+      <div class="coming-soon-box">
+        به زودی فعال می‌شود
+      </div>
+      
+      <p class="system-desc">
+        سیستم پیشرفته AP در حال آماده‌سازی است. به زودی با امکانات بی‌نظیر در خدمت شما خواهیم بود.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const homePage = document.getElementById('homePage');
+      const apSystemPage = document.getElementById('apSystemPage');
+      const homeNavBtn = document.getElementById('homeNavBtn');
+      const apSystemNavBtn = document.getElementById('apSystemNavBtn');
+
+      function switchPage(pageName) {
+        if (homePage) {
+          homePage.classList.add('hidden-page');
+          homePage.classList.remove('visible-page');
+        }
+        if (apSystemPage) {
+          apSystemPage.classList.add('hidden-page');
+          apSystemPage.classList.remove('visible-page');
+        }
+        
+        if (homeNavBtn) homeNavBtn.classList.remove('active-nav');
+        if (apSystemNavBtn) apSystemNavBtn.classList.remove('active-nav');
+
+        if (pageName === 'home') {
+          if (homePage) {
+            homePage.classList.remove('hidden-page');
+            homePage.classList.add('visible-page');
+          }
+          if (homeNavBtn) homeNavBtn.classList.add('active-nav');
+        } else if (pageName === 'apSystem') {
+          if (apSystemPage) {
+            apSystemPage.classList.remove('hidden-page');
+            apSystemPage.classList.add('visible-page');
+          }
+          if (apSystemNavBtn) apSystemNavBtn.classList.add('active-nav');
+        }
+      }
+
+      if (homeNavBtn) {
+        homeNavBtn.addEventListener('click', () => switchPage('home'));
+      }
+      if (apSystemNavBtn) {
+        apSystemNavBtn.addEventListener('click', () => switchPage('apSystem'));
+      }
+
+      switchPage('home');
+
+      const brand = document.querySelector('.brand');
+      if (brand) {
+        brand.style.cursor = 'pointer';
+        brand.addEventListener('click', () => switchPage('home'));
+      }
+    })();
+  </script>
 </body>
 </html>
