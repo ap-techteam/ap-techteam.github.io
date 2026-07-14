@@ -67,6 +67,7 @@
       font-weight: 900;
       color: #4db8ff;
       letter-spacing: 2px;
+      cursor: pointer;
     }
 
     .nav-links {
@@ -90,6 +91,7 @@
       gap: 0.3rem;
       background: rgba(255, 255, 255, 0.02);
       transition: background 0.15s, color 0.15s, border-color 0.15s;
+      text-decoration: none;
     }
 
     .nav-item:hover {
@@ -158,41 +160,6 @@
       font-weight: 400;
     }
 
-    .system-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 0.5rem 0;
-    }
-
-    .system-icon {
-      font-size: 2.5rem;
-      color: #4da6ff;
-      margin-bottom: 0.3rem;
-      font-weight: 700;
-    }
-
-    .coming-soon-box {
-      background: #2a2f3a;
-      border: 2px solid #ffaa33;
-      border-radius: 3rem;
-      padding: 1rem 2.2rem;
-      margin: 1.5rem 0 1rem;
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #ffcc66;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .system-desc {
-      color: #bcc8dd;
-      margin-top: 1rem;
-      max-width: 400px;
-      font-weight: 400;
-    }
-
     .footer-note {
       margin-top: 2rem;
       color: #7a8aa0;
@@ -240,12 +207,8 @@
   <nav class="navbar">
     <div class="brand">AP Technology Team</div>
     <div class="nav-links">
-      <button class="nav-item active-nav" id="homeNavBtn">
-        خانه
-      </button>
-      <button class="nav-item" id="apSystemNavBtn">
-        AP SYSTEM
-      </button>
+      <a href="https://ap-techteam.github.io/apcalendar/" class="nav-item" id="calendarNavLink">تقویم</a>
+      <a href="https://ap-techteam.github.io/apsystem/" class="nav-item" id="apSystemNavLink">AP SYSTEM</a>
     </div>
   </nav>
 
@@ -264,70 +227,46 @@
       </div>
     </div>
 
-    <div id="apSystemPage" class="card hidden-page">
-      <div class="system-icon">AP</div>
-      <div class="system-title">AP SYSTEM</div>
-      <div class="separator" style="background: #ffaa33; width: 60px;"></div>
-      
-      <div class="coming-soon-box">
-        به زودی فعال می‌شود
-      </div>
-      
-      <p class="system-desc">
-        سیستم پیشرفته AP در حال آماده‌سازی است. به زودی با امکانات بی‌نظیر در خدمت شما خواهیم بود.
-      </p>
-    </div>
   </div>
 
   <script>
     (function() {
       const homePage = document.getElementById('homePage');
-      const apSystemPage = document.getElementById('apSystemPage');
-      const homeNavBtn = document.getElementById('homeNavBtn');
-      const apSystemNavBtn = document.getElementById('apSystemNavBtn');
+      const calendarNavLink = document.getElementById('calendarNavLink');
+      const apSystemNavLink = document.getElementById('apSystemNavLink');
 
-      function switchPage(pageName) {
-        if (homePage) {
-          homePage.classList.add('hidden-page');
-          homePage.classList.remove('visible-page');
-        }
-        if (apSystemPage) {
-          apSystemPage.classList.add('hidden-page');
-          apSystemPage.classList.remove('visible-page');
-        }
-        
-        if (homeNavBtn) homeNavBtn.classList.remove('active-nav');
-        if (apSystemNavBtn) apSystemNavBtn.classList.remove('active-nav');
-
-        if (pageName === 'home') {
-          if (homePage) {
-            homePage.classList.remove('hidden-page');
-            homePage.classList.add('visible-page');
-          }
-          if (homeNavBtn) homeNavBtn.classList.add('active-nav');
-        } else if (pageName === 'apSystem') {
-          if (apSystemPage) {
-            apSystemPage.classList.remove('hidden-page');
-            apSystemPage.classList.add('visible-page');
-          }
-          if (apSystemNavBtn) apSystemNavBtn.classList.add('active-nav');
+      function setActiveNav(activeElement) {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => item.classList.remove('active-nav'));
+        if (activeElement) {
+          activeElement.classList.add('active-nav');
         }
       }
-
-      if (homeNavBtn) {
-        homeNavBtn.addEventListener('click', () => switchPage('home'));
-      }
-      if (apSystemNavBtn) {
-        apSystemNavBtn.addEventListener('click', () => switchPage('apSystem'));
-      }
-
-      switchPage('home');
 
       const brand = document.querySelector('.brand');
       if (brand) {
-        brand.style.cursor = 'pointer';
-        brand.addEventListener('click', () => switchPage('home'));
+        brand.addEventListener('click', () => {
+          homePage.classList.remove('hidden-page');
+          homePage.classList.add('visible-page');
+          const navItems = document.querySelectorAll('.nav-item');
+          navItems.forEach(item => item.classList.remove('active-nav'));
+        });
       }
+
+      if (calendarNavLink) {
+        calendarNavLink.addEventListener('click', () => {
+          setActiveNav(calendarNavLink);
+        });
+      }
+
+      if (apSystemNavLink) {
+        apSystemNavLink.addEventListener('click', () => {
+          setActiveNav(apSystemNavLink);
+        });
+      }
+
+      homePage.classList.remove('hidden-page');
+      homePage.classList.add('visible-page');
     })();
   </script>
 </body>
