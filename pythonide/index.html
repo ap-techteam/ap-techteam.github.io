@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AP PYTHON IDE</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/theme/dracula.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/theme/eclipse.css">
+
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/python/python.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:monospace;
+background:#202124;
+color:white;
+}
+
+header{
+padding:15px;
+font-size:22px;
+background:#111;
+}
+
+.menu{
+padding:10px;
+}
+
+button,select{
+padding:8px;
+margin:3px;
+}
+
+.CodeMirror{
+height:350px;
+font-size:16px;
+}
+
+.terminal{
+background:black;
+color:#00ff00;
+height:150px;
+padding:10px;
+overflow:auto;
+}
+
+.light{
+background:#eee;
+color:black;
+}
+
+.cream{
+background:#f5e6c8;
+color:#333;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+🐍 AP PYTHON IDE
+</header>
+
+<div class="menu">
+
+<button onclick="runCode()">▶ اجرا</button>
+
+<button onclick="saveProject()">💾 ذخیره</button>
+
+<input type="file" id="file" accept=".appython" onchange="loadProject()">
+
+<select onchange="changeTheme(this.value)">
+<option value="dark">تاریک</option>
+<option value="light">روشن</option>
+<option value="cream">کرم</option>
+</select>
+
+</div>
+
+
+<textarea id="code">
+print("Hello AP")
+</textarea>
+
+
+<div class="terminal" id="terminal">
+Terminal Ready...
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+
+
+<script>
+
+let editor;
+let pyodide;
+
+
+// CodeMirror
+
+editor = CodeMirror.fromTextArea(
+document.getElementById("code"),
+{
+mode:"python",
+theme:"dracula",
+lineNumbers:true
+}
+);
+
+
+// Python
+
+async function start(){
+
+pyodide = await loadPyodide();
+
+terminal.innerHTML=
+"Python Ready ✅";
+
+}
+
+start();
+
+
+
+async function runCode(){
+
+let output =
+document.getElementById("terminal");
+
+output.innerHTML="";
+
+
+pyodide.setStdout({
+batched:(msg)=>{
+output.innerHTML += msg+"<br>";
+}
+});
+
+
+try{
+
+await pyodide.runPythonAsync(
+editor.getValue()
+);
+
+}
+
+catch(e){
+
+output.innerHTML=
+"Error: "+e;
+
+}
+
+}
+
+
+
+// Save .appython
+
+function saveProject(){
+
+let data={
+
+name:"AP Project",
+
+theme:document.body.className,
+
+code:editor.getValue()
+
+};
+
+
+let blob =
+new Blob(
+[JSON.stringify(data)],
+{type:"application/json"}
+);
+
+
+let a=document.createElement("a");
+
+a.href=
+URL.createObjectURL(blob);
+
+a.download=
+"project.appython";
+
+a.click();
+
+}
+
+
+
+// Load .appython
+
+function loadProject(){
+
+let file =
+document.getElementById("file").files[0];
+
+
+let reader=new FileReader();
+
+
+reader.onload=function(){
+
+let data=
+JSON.parse(reader.result);
+
+
+editor.setValue(data.code);
+
+
+changeTheme(
+data.theme.replace("light","light")
+);
+
+};
+
+
+reader.readAsText(file);
+
+}
+
+
+
+// Themes
+
+function changeTheme(t){
+
+
+if(t=="dark"){
+
+editor.setOption(
+"theme",
+"dracula"
+);
+
+document.body.className="";
+
+}
+
+
+if(t=="light"){
+
+editor.setOption(
+"theme",
+"eclipse"
+);
+
+document.body.className="light";
+
+}
+
+
+if(t=="cream"){
+
+editor.setOption(
+"theme",
+"eclipse"
+);
+
+document.body.className="cream";
+
+}
+
+}
+
+
+</script>
+
+
+</body>
+</html>
